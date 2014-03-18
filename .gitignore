@@ -1,0 +1,14 @@
+# generated files
+/bin/
+/gen/
+
+# do not store the binary, it will be regenerated
+udpxy
+
+# look at local.properties.sample
+/local.properties
+
+# Eclipse stuff
+/.classpath
+/.project
+/.settings/
