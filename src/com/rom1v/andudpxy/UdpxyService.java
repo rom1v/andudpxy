@@ -28,12 +28,6 @@ public class UdpxyService extends Service {
 
     private static final String TAG = UdpxyService.class.getSimpleName();
 
-    /** Command action to start the udpxy proxy. */
-    public static final String ACTION_START_UDPXY = "com.rom1v.andudpxy.START";
-
-    /** Command action to stop the udpxy proxy. */
-    public static final String ACTION_STOP_UDPXY = "com.rom1v.andudpxy.STOP";
-
     public static final String EXTRA_PORT = "port";
 
     /** The HTTP port to be used by the clients. */
@@ -47,13 +41,8 @@ public class UdpxyService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        String action = intent.getAction();
-        if (ACTION_START_UDPXY.equals(action)) {
-            int port = intent.getIntExtra(EXTRA_PORT, DEFAULT_PORT);
-            startUdpxy(port);
-        } else if (ACTION_STOP_UDPXY.equals(action)) {
-            stopSelf();
-        }
+        int port = intent.getIntExtra(EXTRA_PORT, DEFAULT_PORT);
+        startUdpxy(port);
         return START_STICKY;
     }
 
@@ -158,7 +147,6 @@ public class UdpxyService extends Service {
      */
     public static void startUdpxy(Context context, int port) {
         Intent intent = new Intent(context, UdpxyService.class);
-        intent.setAction(ACTION_START_UDPXY);
         if (port != 0) {
             intent.putExtra(EXTRA_PORT, port);
         }
@@ -183,8 +171,7 @@ public class UdpxyService extends Service {
      */
     public static void stopUdpxy(Context context) {
         Intent intent = new Intent(context, UdpxyService.class);
-        intent.setAction(ACTION_STOP_UDPXY);
-        context.startService(intent);
+        context.stopService(intent);
     }
 
     /**
