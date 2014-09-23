@@ -52,7 +52,6 @@ public class UdpxyService extends Service {
             int port = intent.getIntExtra(EXTRA_PORT, DEFAULT_PORT);
             startUdpxy(port);
         } else if (ACTION_STOP_UDPXY.equals(action)) {
-            stopUdpxy();
             stopSelf();
         }
         return START_STICKY;
